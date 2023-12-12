@@ -1,0 +1,14 @@
+Mods: {
+	HardToLessHard: {
+		Dialogue: {
+			FactionLeader: {
+				StandardDialogue1: Here to kill some more?
+				StandardDialogue2: Out of corpses already?
+				StandardDialogue3: Buy a bone or two.
+				StandardDialogue4: That low on soul?
+				CommonDialogue: I hear something in the graveyard, you might want to check it out.
+				RareDialogue: The reaper awaits your challenge.
+			}
+		}
+	}
+}

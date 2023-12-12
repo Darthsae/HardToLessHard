@@ -1,0 +1,93 @@
+Items: {
+	Singularity: {
+		DisplayName: Singularity
+		Tooltip: ""
+	}
+
+	CompressedStar: {
+		DisplayName: Compressed Star
+		Tooltip: ""
+	}
+
+	GreaterSoulPotion: {
+		DisplayName: Greater Soul Potion
+		Tooltip: ""
+	}
+
+	LesserSoulPotion: {
+		DisplayName: Lesser Soul Potion
+		Tooltip: ""
+	}
+
+	SoulPotion: {
+		DisplayName: Soul Potion
+		Tooltip: ""
+	}
+
+	SuperSoulPotion: {
+		DisplayName: Super Soul Potion
+		Tooltip: ""
+	}
+
+	SoulGem: {
+		DisplayName: Soul Gem
+		Tooltip: ""
+	}
+}
+
+Prefixes.SmitingPrefix.DisplayName: Smiting Prefix
+
+Keybinds: {
+	SpiritGod.DisplayName: Spirit God
+	Crafting.DisplayName: Crafting
+	"Testing UI.DisplayName": Testing  UI
+}
+
+Buffs: {
+	SpiritGodMinionBuff: {
+		DisplayName: Spirit God Minion Buff
+		Description: Mods.HardToLessHard.Buffs.SpiritGodMinionBuff.Description
+	}
+}
+
+Projectiles: {
+	SpiritGodMinion.DisplayName: Spirit God Minion
+	SpiritGodSpikeMinion.DisplayName: Spirit God Spike Minion
+	SpellProjectile.DisplayName: Spell Projectile
+}
+
+UI.Soul: Soul: {0} / {1}
+
+NPCs: {
+	FactionLeader: {
+		DisplayName: Faction Leader
+
+		TownNPCMood: {
+			Content: I am content.
+			NoHome: I hate not having a home.
+			FarFromHome: I am too far from home.
+			LoveSpace: I love having so much space.
+			DislikeCrowded: I dislike how crowded I am.
+			HateCrowded: I hate how crowded I am.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+	}
+}
+
+Factions: {
+	NoFaction: {
+		DisplayName: None
+		Description: a
+	}
+
+	Dead: {
+		DisplayName: Dead
+		Description: a
+	}
+
+	Swarm: {
+		DisplayName: Swarm
+		Description: a
+	}
+}

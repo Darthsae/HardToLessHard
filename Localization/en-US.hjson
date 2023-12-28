@@ -10,5 +10,14 @@ Mods: {
 				RareDialogue: The reaper awaits your challenge.
 			}
 		}
+
+		Deities: {
+			Blorgun: {
+				DisplayName: Blorgun
+				Description: The blood god.
+			}
+		}
+
+		Religions.NoReligion.DisplayName: No Religion
 	}
 }

@@ -13,6 +13,9 @@ using System.Linq;
 using System;
 using HardToLessHard.Content.Projectiles;
 using HardToLessHard.Content.Spells;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
+using HardToLessHard.Utilities.IK;
 
 namespace HardToLessHard.Content.NPCs
 {
@@ -30,6 +33,11 @@ namespace HardToLessHard.Content.NPCs
             WALKING
         }
 
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            return base.PreDraw(spriteBatch, screenPos, drawColor);
+        }
+
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 16; // The total amount of frames the NPC has
@@ -43,8 +51,6 @@ namespace HardToLessHard.Content.NPCs
                               // Rotation = MathHelper.ToRadians(180) // You can also change the rotation of an NPC. Rotation is measured in radians
                               // If you want to see an example of manually modifying these when the NPC is drawn, see PreDraw
             };
-
-            
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
         }
@@ -288,7 +294,7 @@ namespace HardToLessHard.Content.NPCs
 
                             //Mod.Logger.Info(Faction);
 
-                            int spell = SpellProjectile.NewSpellProjectile(NPC.GetSource_FromThis(), NPC.Center + direction * 32, direction * 4, modSpell, Faction, Main.myPlayer);
+                            SpellProjectile.NewSpellProjectile(NPC.GetSource_FromThis(), NPC.Center + direction * 32, direction * 4, modSpell, Faction, Main.myPlayer);
                             //Mod.Logger.Info(((SpellProjectile)Main.projectile[spell].ModProjectile).Faction);
                         }
                         else

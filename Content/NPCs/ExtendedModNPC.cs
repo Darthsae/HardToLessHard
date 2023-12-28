@@ -4,12 +4,17 @@ using HardToLessHard.Content.Factions;
 using Terraria;
 using Terraria.ModLoader;
 using System;
+using HardToLessHard.Content.Projectiles;
 
 namespace HardToLessHard.Content.NPCs
 {
     public abstract class ExtendedModNPC : ModNPC
     {
         public string Faction = "NoFaction";
+
+        public string Religion = "NoReligion";
+
+        public string Deity = "NoDeity";
 
         public bool CanChatWith = false;
 
@@ -47,8 +52,10 @@ namespace HardToLessHard.Content.NPCs
 
         public override bool? CanBeHitByProjectile(Projectile projectile)
         {
+            if (projectile.ModProjectile is ExtendedModProjectile && ((ExtendedModProjectile)projectile.ModProjectile).Faction.Equals(Faction)) return false;
+            Mod.Logger.Info("Something Went Wrong On NPC");
             bool y = ModFaction.IsProjectileHostile(Faction, projectile);
-            if (y) Mod.Logger.Info(projectile.Name);
+            //if (y) Mod.Logger.Info(projectile.Name);
             return y;
         }
 

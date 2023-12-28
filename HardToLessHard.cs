@@ -1,6 +1,11 @@
 using HardToLessHard.Content.Factions;
+using HardToLessHard.Content.Religions;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System.IO;
 using Terraria;
+using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -26,6 +31,12 @@ namespace HardToLessHard
         public override void Load()
         {
 			Instance = this;
+
+            if (Main.netMode != NetmodeID.Server)
+            {
+                Filters.Scene["HardToLessHard:BloodScreen"] = new Filter(new ScreenShaderData(new Ref<Effect>(ModContent.Request<Effect>("HardToLessHard/Assets/Effects/BloodScreenF", AssetRequestMode.ImmediateLoad).Value), "BloodScreen"), EffectPriority.VeryHigh);
+                Filters.Scene["HardToLessHard:BloodScreen"].Load();
+            }
         }
 
         public override void Unload()
@@ -38,21 +49,31 @@ namespace HardToLessHard
             foreach (var f in FactionLoader.factions) 
             {
                 f.relations = new short[FactionLoader.Count];
-                f.relations[f.Type] = 100;
             }
 
             foreach (var f in FactionLoader.factions)
             {
+                for (int i = 0; i < f.relations.Length; i++)
+                {
+                    f.relations[i] = FactionLoader.GetFaction(i).defaultRelation;
+                }
+
+                f.relations[f.Type] = 100;
+
                 f.RelationSetup();
 
                 Logger.Info("-----------------");
                 Logger.Info(f.DisplayName);
                 Logger.Info(f.Name);
 
-                foreach (var relation in f.relations)
-                {
-                    Logger.Info(relation);
-                }
+                
+            }
+
+            foreach (var d in DeityLoader.deities)
+            {
+                Logger.Info("-----------------");
+                Logger.Info(d.DisplayName);
+                Logger.Info(d.Name);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using HardToLessHard.Common.Players;
 using HardToLessHard.Content.Factions;
+using HardToLessHard.Content.NPCs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -23,8 +24,11 @@ namespace HardToLessHard.Content.Projectiles
 
         public override bool? CanHitNPC(NPC target)
         {
+            //Mod.Logger.Info(Faction);
+            if (target.ModNPC is ExtendedModNPC && ((ExtendedModNPC)target.ModNPC).Faction.Equals(Faction)) return false;
+            Mod.Logger.Info("Something went very wrong");
             bool y = ModFaction.IsNPCHostile(Faction, target);
-            if (y) Mod.Logger.Info(target.GivenName);
+            //if (y) Mod.Logger.Info(target.GivenName);
             return y;
         }
 
@@ -71,7 +75,7 @@ namespace HardToLessHard.Content.Projectiles
         {
             PreBuffsOnHitNPC(target, hit, damageDone);
 
-            
+            //Mod.Logger.Info(Faction);
 
             if (buffs.Length > 0) {
                 foreach (var buff in buffs)

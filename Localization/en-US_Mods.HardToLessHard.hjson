@@ -33,6 +33,21 @@ Items: {
 		DisplayName: Soul Gem
 		Tooltip: ""
 	}
+
+	EnrageBlorgun: {
+		DisplayName: Enrage Blorgun
+		Tooltip: ""
+	}
+
+	StrangeSkull: {
+		DisplayName: Strange Skull
+		Tooltip: ""
+	}
+
+	DeificAltarItem: {
+		DisplayName: Deific Altar Item
+		Tooltip: ""
+	}
 }
 
 Prefixes.SmitingPrefix.DisplayName: Smiting Prefix
@@ -54,6 +69,8 @@ Projectiles: {
 	SpiritGodMinion.DisplayName: Spirit God Minion
 	SpiritGodSpikeMinion.DisplayName: Spirit God Spike Minion
 	SpellProjectile.DisplayName: Spell Projectile
+	IKProjectile.DisplayName: I K Projectile
+	ReaperSpear.DisplayName: Reaper Spear
 }
 
 UI.Soul: Soul: {0} / {1}
@@ -73,6 +90,9 @@ NPCs: {
 			Princess_LovesNPC: I like {NPCName}.
 		}
 	}
+
+	StarkLore.DisplayName: Stark Lore
+	FactionReaper.DisplayName: Faction Reaper
 }
 
 Factions: {
@@ -90,4 +110,6 @@ Factions: {
 		DisplayName: Swarm
 		Description: a
 	}
+
+	Sanguine.DisplayName: Sanguine
 }

@@ -66,7 +66,7 @@ namespace HardToLessHard.Content.Projectiles
 
         public static int NewSpellProjectile(IEntitySource spawnSource, float X, float Y, float SpeedX, float SpeedY, ModSpell modSpell, string faction = "NoFaction", int Owner = -1, float ai0 = 0f, float ai1 = 0f, float ai2 = 0f)
         {
-            if (Owner == -1) Owner = Main.myPlayer;
+            if (Owner == -1) Owner = -1;
             int num = 1000;
             for (int i = 0; i < 1000; i++)
             {

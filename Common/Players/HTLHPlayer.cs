@@ -3,8 +3,12 @@ using HardToLessHard.Content.Factions;
 using HardToLessHard.Content.Items;
 using HardToLessHard.Content.NPCs;
 using HardToLessHard.Content.Projectiles;
+using HardToLessHard.Content.Quests;
+using HardToLessHard.Content.Religions;
+using HardToLessHard.Content.TileEntities;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -17,8 +21,25 @@ namespace HardToLessHard.Common.Players
         public bool inConversation = false;
         public ExtendedModNPC conversationNPC = null;
         public bool testingUI = false;
+        public bool deificAltarUI = false;
+        public DeificAltarTileEntity deificAltarTileEntity = null;
+
+        int timer = 0;
 
         public string faction = "NoFaction";
+
+        public override void PostUpdate()
+        {
+            timer++;
+
+            if (timer % 900 == 0)
+            {
+                foreach (ModQuest quest in QuestLoader.quests)
+                {
+                    quest.CheckQuest(Player.name);
+                }
+            }
+        }
 
         public override bool ShiftClickSlot(Item[] inventory, int context, int slot)
         {
@@ -88,6 +109,20 @@ namespace HardToLessHard.Common.Players
         public override void SaveData(TagCompound tag)
         {
             tag["faction"] = faction;
+        }
+
+        public override void PostUpdateMiscEffects()
+        {
+            Filter bloodScreen = Filters.Scene["HardToLessHard:BloodScreen"];
+            
+            if (DeityLoader.GetDeity("Blorgun").enraged)
+            {
+                DeityLoader.GetDeity("Blorgun").Draw();
+
+                if (!bloodScreen.IsActive()) Filters.Scene.Activate("HardToLessHard:BloodScreen");
+                else bloodScreen.GetShader().UseProgress(Main.GlobalTimeWrappedHourly * 10);
+            }
+            else Filters.Scene.Deactivate("HardToLessHard:BloodScreen");
         }
     }
 }

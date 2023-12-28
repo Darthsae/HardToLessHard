@@ -1,8 +1,12 @@
 ﻿using HardToLessHard.Common.Players;
 using HardToLessHard.Content.NPCs;
 using HardToLessHard.Content.Projectiles;
+using HardToLessHard.Content.Religions;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
+using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -13,6 +17,10 @@ namespace HardToLessHard.Content.Factions
         public string LocalizationCategory => "Factions";
         public int Type { get; internal set; }
         public short[] relations { get; set; }
+
+        public virtual short defaultRelation => 100;
+
+        public virtual string Icon => (GetType().Namespace + "." + Name + "_Icon").Replace('.', '/');
 
         public virtual Color Color => Color.White;
 
@@ -98,6 +106,36 @@ namespace HardToLessHard.Content.Factions
 
             //Logging.PublicLogger.Info($"Not: {projectile.Name}");
             return projectile.hostile;
+        }
+    }
+
+    internal class FactionUIElement : UIImageButton
+    {
+        internal string Faction;
+        internal UIImage icon;
+        internal UIText name;
+        private readonly float _scale;
+
+
+        public FactionUIElement(Asset<Texture2D> background, string faction, float scale = 1f) : base(background)
+        {
+            Faction = faction;
+            _scale = scale;
+            icon = new UIImage(ModContent.Request<Texture2D>(FactionLoader.GetFaction(Faction).Icon));
+            icon.Left.Set(10, 0f);
+            icon.Top.Set(10, 0f);
+            name = new UIText(FactionLoader.GetFaction(Faction).DisplayName);
+            name.Width.Set(88, 0f);
+            name.Height.Set(32, 0f);
+            name.Left.Set(52, 0f);
+            name.Top.Set(10, 0f);
+            Append(icon);
+            Append(name);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria;
 
 namespace HardToLessHard.Utilities.Loot
@@ -38,6 +39,16 @@ namespace HardToLessHard.Utilities.Loot
     public struct WeightedChoice : IChoice
     {
         public List<Item> items;
+
+        public WeightedChoice(List<Tuple<Item, int>> Items) 
+        {
+            items = new List<Item>();
+
+            foreach (Tuple<Item, int> item in Items)
+            {
+                AddItem(item.Item1, item.Item2);
+            }
+        }
 
         public List<Item> GetItems()
         {

@@ -32,13 +32,7 @@ namespace HardToLessHard.Common.Players
         {
             timer++;
 
-            if (timer % 900 == 0)
-            {
-                foreach (ModQuest quest in QuestLoader.quests)
-                {
-                    quest.CheckQuest(Player.name);
-                }
-            }
+            if (timer % 900 == 0) foreach (ModQuest quest in QuestLoader.quests) quest.CheckQuest(Player);
         }
 
         public override bool ShiftClickSlot(Item[] inventory, int context, int slot)

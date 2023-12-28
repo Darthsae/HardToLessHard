@@ -12,7 +12,7 @@ namespace HardToLessHard.Content.Quests
     {
         public string LocalizationCategory => "Quests";
         public int Type { get; internal set; }
-        public List<string> completed;
+        public List<string> completed = new List<string>();
 
         public virtual QuestCondition[] Conditions => new QuestCondition[0];
 
@@ -36,14 +36,18 @@ namespace HardToLessHard.Content.Quests
 
         public void CheckQuest(string player)
         {
+            Mod.Logger.Info(player);
             if (completed.Contains(player)) return;
 
             Player toPlayer = null;
 
+            Mod.Logger.Info("Pre iterate");
             foreach (Player playerIterated in Main.player) if (playerIterated != null && playerIterated.name == player) { toPlayer = playerIterated; break; }
 
+            Mod.Logger.Info("Pre null check");
             if (toPlayer == null) return;
 
+            Mod.Logger.Info("Pre check player");
             for (int i = 0; i < Conditions.Length; i++) if (!Conditions[i].CheckCompletion(toPlayer)) return;
 
             completed.Add(player);
@@ -57,6 +61,27 @@ namespace HardToLessHard.Content.Quests
             AdvancedPopupRequest request = new AdvancedPopupRequest();
             request.Text = $"Completed quest: {DisplayName.Value}";
             PopupText.NewText(request, toPlayer.position + new Microsoft.Xna.Framework.Vector2(0, -100));
+        }
+
+        public void CheckQuest(Player player)
+        {
+            Mod.Logger.Info(player.name);
+            if (completed.Contains(player.name)) return;
+
+            Mod.Logger.Info("Pre check player");
+            for (int i = 0; i < Conditions.Length; i++) if (!Conditions[i].CheckCompletion(player)) return;
+
+            completed.Add(player.name);
+
+            foreach (QuestReward reward in Rewards)
+            {
+                reward.Reward(player);
+            }
+
+            Main.NewText($"Completed quest: {DisplayName.Value}");
+            AdvancedPopupRequest request = new AdvancedPopupRequest();
+            request.Text = $"Completed quest: {DisplayName.Value}";
+            PopupText.NewText(request, player.position + new Microsoft.Xna.Framework.Vector2(0, -100));
         }
     }
 
